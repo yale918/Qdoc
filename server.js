@@ -62,28 +62,24 @@ async function findOrCreateDocument(id) {
 }
 
 
-
+/*
   console.log("hello")
   expr.use(express.static('client/build'))
   const path = require('path')
   expr.get("*",(req,res)=>{
     res.sendFile(path.resolve(__dirname,'client','build','index.html'))
   })
+*/
 
 
-
-/*
 if(process.env.NODE_ENV == "production"){
-  console.log("hello")
+  expr.use(express.static('client/build'))
   const path = require('path')
-  const clientPath = path.join(__dirname,'../client/build')
-  expr.use(express.static(clientPath))  
   expr.get("*",(req,res)=>{
-    const buildPath = path.join(__dirname,'../client/build/index.html')
-    res.sendFile(buildPath)
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
   })
 }
-*/
+
 server.listen(PORT,()=>{
   console.log("#server: static_S is listening on port: ",5000)
 })

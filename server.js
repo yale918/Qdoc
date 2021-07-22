@@ -26,15 +26,22 @@ mongoose.connection.on('connected',()=>{
   console.log("#Qdoc: connected to mongo yeahh")
 })
 
-
+/*
 const io = require('socket.io')(3001, {
-  /*
+  cors: {
+    origin: 'http://localhost:3002',
+    methods: ['GET', 'POST']
+  },
+})
+*/
+const io = require('socket.io')(3001, {
   cors: {
     origin: 'http://localhost:5000',
     methods: ['GET', 'POST']
   },
-  */
 })
+
+
 
 const defaultValue = ""
 
@@ -81,6 +88,14 @@ if(process.env.NODE_ENV == "production"){
     res.sendFile(path.resolve(__dirname,'client','build','index.html'))
   })
 }
+else{
+  expr.use(express.static('client/build'))
+  const path = require('path')
+  expr.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
+}
+
 
 server.listen(PORT,()=>{
   console.log("#server: static_S is listening on port: ",5000)

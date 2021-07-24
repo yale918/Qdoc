@@ -26,11 +26,13 @@ mongoose.connection.on('connected',()=>{
   console.log("#Qdoc: connected to mongo yeahh")
 })
 
-const { Server } = require("socket.io")
-const io = new Server(server)
 
-
-
+const io = require('socket.io')(3001, {
+  cors: {
+    origin: 'http://localhost:5000',
+    methods: ['GET', 'POST']
+  },
+})
 
 if(process.env.NODE_ENV == "production"){
   console.log("in prod")

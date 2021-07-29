@@ -42,10 +42,10 @@ if(process.env.NODE_ENV == "production"){
 }
 else{
   console.log("in dev")
-  expr.use(express.static('client/build'))
+  expr.use(express.static('client/public'))
   const path = require('path')
   expr.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    res.sendFile(path.resolve(__dirname,'client','public','index.html'))
   })
 }
 
